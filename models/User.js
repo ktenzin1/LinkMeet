@@ -9,12 +9,17 @@ AWS.config.update({
 
 const docClient = new AWS.DynamoDB.DocumentClient();
 
-const createUser = async (email, passwordHash) => {
+
+// Create a new user
+const createUser = async (username, email, hashedPassword, skills) => {
     const params = {
         TableName: 'Users',
         Item: {
+            username: username,
             email: email,
-            password: passwordHash,
+            password: hashedPassword,
+            skills: skills.split(',').map(skill => skill.trim()),
+            isLive: false // Default is not live when signing up
         }
     };
     await docClient.put(params).promise();
@@ -29,5 +34,15 @@ const getUser = async (email) => {
     return data.Item || null;
 };
 
+// Function to search professionals by skill
+const searchProfessionalsBySkill = async (skill) => {
+    const params = {
+        TableName: 'Users',
+        FilterExpression: 'contains (skills, :skill) AND isLive = :live',
+        ExpressionAttributeValues: { ':skill': skill, ':live': true }
+    };
+    const data = await docClient.scan(params).promise();
+    return data.Items;
+};
 
-module.exports = { createUser, getUser };
+module.exports = { createUser, getUser, searchProfessionalsBySkill };

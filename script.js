@@ -43,3 +43,32 @@ document.getElementById('login-form').addEventListener('submit', async function 
         alert('Error logging in.');
     }
 });
+
+// Search form
+document.getElementById('search-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const skill = document.querySelector('input[name="skill"]').value;
+
+    try {
+        const response = await fetch(`/search?skill=${encodeURIComponent(skill)}`, {
+            method: 'GET',
+        });
+        const professionals = await response.json();
+        
+        const resultsDiv = document.getElementById('search-results');
+        resultsDiv.innerHTML = ''; // Clear previous results
+
+        if (professionals.length > 0) {
+            professionals.forEach(prof => {
+                const professionalDiv = document.createElement('div');
+                professionalDiv.textContent = `Name: ${prof.username}, Skills: ${prof.skills.join(', ')}`;
+                resultsDiv.appendChild(professionalDiv);
+            });
+        } else {
+            resultsDiv.textContent = 'No live professionals found for the selected skill.';
+        }
+    } catch (error) {
+        alert('Search failed.');
+    }
+});
