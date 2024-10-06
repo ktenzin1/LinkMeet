@@ -7,7 +7,7 @@ const router = express.Router();
 
 // Sign Up Route
 router.post('/signup', async (req, res) => {
-    const { username, email, password } = req.body; // Capture username, email, and password
+    const { username, email, password, skills } = req.body; // Capture username, email, password, and skills
 
     // Input validation (ensure username, email, and password are provided)
     if (!username || !email || !password) {
