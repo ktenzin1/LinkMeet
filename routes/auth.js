@@ -10,8 +10,8 @@ router.post('/signup', async (req, res) => {
     const { username, email, password, skills } = req.body; // Capture username, email, password, and skills
 
     // Input validation (ensure username, email, and password are provided)
-    if (!username || !email || !password) {
-        return res.status(400).json({ error: 'Username, email, and password are required.' });
+    if (!username || !email || !password || !skills) {
+        return res.status(400).json({ error: 'Username, email, password, and skills are required.' });
     }
 
     try {
