@@ -9,11 +9,11 @@ AWS.config.update({
 
 const docClient = new AWS.DynamoDB.DocumentClient();
 
-const createUser = async (username, passwordHash) => {
+const createUser = async (email, passwordHash) => {
     const params = {
         TableName: 'Users',
         Item: {
-            username: username,
+            email: email,
             password: passwordHash,
         }
     };
