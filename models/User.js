@@ -20,13 +20,14 @@ const createUser = async (username, passwordHash) => {
     await docClient.put(params).promise();
 };
 
-const getUser = async (username) => {
+const getUser = async (email) => {
     const params = {
         TableName: 'Users',
-        Key: { username: username }
+        Key: { email: email } // Adjust this to use the email field
     };
     const data = await docClient.get(params).promise();
     return data.Item || null;
 };
+
 
 module.exports = { createUser, getUser };
