@@ -12,7 +12,7 @@ document.getElementById('signup-form').addEventListener('submit', async function
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ username, email, password }),
+            body: JSON.stringify({ username, email, password, skills }),
         });
         const data = await response.json();
         alert(data.message || data.error);
