@@ -19,9 +19,10 @@
     <section id="signup">
         <h2>Sign Up</h2>
         <form id="signup-form">
-            <input type="text" placeholder="Full Name" required>
-            <input type="email" placeholder="Email" required>
-            <input type="text" placeholder="Skills (comma-separated)" required>
+            <input type="text" name="fullName" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="password" placeholder="Password" required>
+            <input type="text" name="skills" placeholder="Skills (comma-separated)" required>
             <button type="submit">Create Account</button>
         </form>
     </section>
@@ -29,7 +30,8 @@
     <section id="login">
         <h2>Log In</h2>
         <form id="login-form">
-            <input type="email" placeholder="Email" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="password" placeholder="Password" required>
             <button type="submit">Log In</button>
         </form>
     </section>
@@ -38,6 +40,7 @@
         <p>&copy; 2024 LinkMeet. All rights reserved.</p>
     </footer>
 
+    <script src="auth.js"></script>  <!-- Ensure auth.js is included -->
     <script src="script.js"></script>
 </body>
 </html>
